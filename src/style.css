@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  background-color: rgb(255, 255, 255);
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  background-color: #004d40;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.layout {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.component-menu {
+  width: 20%;
+  background-color: #aaa;
+  padding: 10px;
+  border: 3px double rgb(12, 11, 11);
+}
+
+.whiteboard {
+  flex: 1;
+  background-color: #fff;
+  padding: 10px;
+  border: 3px solid rgb(14, 13, 13);
+}
