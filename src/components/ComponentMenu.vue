@@ -7,7 +7,7 @@
         :key="index"
         class="menu-item"
         draggable="true"
-        @dragstart="handleDragStart(component)"
+        @dragstart="(event) => handleDragStart(event, component)"
       >
         <div class="component-icon">{{ component.icon }}</div>
         <div class="component-label">{{ component.label }}</div>
@@ -29,7 +29,7 @@ export default {
     };
   },
   methods: {
-    handleDragStart(component) {
+    handleDragStart(event, component) {
       event.dataTransfer.setData('component', JSON.stringify(component));
     },
   },
