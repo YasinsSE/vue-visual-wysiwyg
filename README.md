@@ -26,7 +26,7 @@ A **drag-and-drop UI editor** built with Vue.js, allowing users to visually arra
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Yasins-SE/vue-visual-wysiwyg.git
+   git clone https://github.com/YasinsSE/vue-visual-wysiwyg
    cd vue-visual-wysiwyg
    ```
 
@@ -39,10 +39,10 @@ A **drag-and-drop UI editor** built with Vue.js, allowing users to visually arra
 3. Start the development server:
 
    ```bash
-   npm run serve
+   npm run dev
    ```
 
-4. Open the app in your browser at `http://localhost:8080`.
+4. Open the app in your browser at Local: 'http://localhost:5173/'
 
 ---
 
@@ -60,11 +60,12 @@ A **drag-and-drop UI editor** built with Vue.js, allowing users to visually arra
 ```plaintext
 src/
 ├── components/
-│   ├── ComponentMenu.vue    # Sidebar menu with draggable components
-│   ├── Whiteboard.vue       # Drop area where components are placed
-├── App.vue                  # Main layout combining menu and whiteboard
-├── main.js                  # Vue app initialization
-├── style.css                # Icons or additional resources
+│   ├── ComponentMenu.vue       # Sidebar menu with draggable components
+│   ├── ComponentSettings.vue   # Sidebar menu to modify component features
+│   ├── Whiteboard.vue          # Drop area where components are placed
+├── App.vue                     # Main layout combining menu and whiteboard
+├── main.js                     # Vue app initialization
+├── style.css                   # Icons or additional resources
 ```
 
 ---
