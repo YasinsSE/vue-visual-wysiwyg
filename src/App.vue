@@ -6,6 +6,7 @@
 
     <div class="layout">
       <Whiteboard />
+      <ComponentSettings/>
       <ComponentMenu />
     </div>
   </div>
@@ -14,6 +15,8 @@
 <script>
 import Whiteboard from './components/Whiteboard.vue';
 import ComponentMenu from './components/ComponentMenu.vue';
+import ComponentSettings from './components/ComponentSettings.vue';
+
 //import HelloWorld from './components/draft.vue';
 
 export default {
@@ -22,6 +25,7 @@ export default {
   components: {
     Whiteboard,
     ComponentMenu,
+    ComponentSettings,
   },
 
   data() {
@@ -34,7 +38,4 @@ export default {
 </script>
 
 <style src="./style.css">
-#app {
-  font-family: Arial, sans-serif;
-}
 </style>

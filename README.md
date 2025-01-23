@@ -1,4 +1,5 @@
 # Vue 3 + Vite
+(The README file is not up to date)
 
 ---
 
@@ -11,7 +12,7 @@ A **drag-and-drop UI editor** built with Vue.js, allowing users to visually arra
 ## Features
 
 - **Component Menu**:
-  - A list of draggable components like `Button`, `Text Area`, and `Checkbox`.
+  - A list of draggable components like `Button`, `Text Area`, and `Checkbox` etc.
   - Each component is visually represented with icons for intuitive interaction.
 - **Whiteboard**:
   - A drop area where users can place components by dragging them from the menu.

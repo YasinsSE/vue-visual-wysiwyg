@@ -1,6 +1,6 @@
 <template>
   <div class="component-menu">
-    <h3>Component Section</h3>
+    <h2>Component Section</h2>
     <div class="menu-list">
       <div
         v-for="(component, index) in components"
@@ -37,13 +37,9 @@ export default {
 </script>
 
 <style>
-.component-menu {
-  width: 250px;
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+.component-menu h2{
+  text-align: center;
 }
 
 .menu-list {

@@ -70,8 +70,9 @@ export default {
   background-color: #f0f0f0;
 }
 
-h2 {
-  justify-self: center;
+.whiteboard h2 {
+  text-align: center;
+  margin-top: -1.5em;
 }
 
 .dropped-item {
