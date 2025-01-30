@@ -3,39 +3,63 @@
     <h2>Visualization</h2>
     <div
       v-for="(component, index) in componentStore.droppedComponents"
-      :key="index"
+      :key="component.id"
       class="dropped-item"
       :style="{
         left: component.x + 'px',
         top: component.y + 'px',
         backgroundColor: component.backgroundColor || '#e0f7fa',
+        width: component.width + 'px',
+        height: component.height + 'px',
       }"
-      @click.stop="selectComponentForEditing(component)" 
+      @click.stop="selectComponentForEditing(component)"
     >
+
       <div class="component-container">
-        <!-- Component Preview based on type -->
+        <!-- Button Component Preview -->
         <div v-if="component.type === 'button'" class="component-preview">
-          <button>Button</button>
+          <button 
+            :style="{
+              width: component.width + 'px', 
+              height: component.height + 'px',
+              backgroundColor: component.buttonColor || '#008cba', 
+              color: component.textColor || '#ffffff',
+              fontSize: component.fontSize + 'px',
+              fontFamily: component.fontFamily || 'Arial, sans-serif',
+              borderRadius: component.borderRadius + 'px'
+            }">
+            {{ component.text }}
+          </button>
         </div>
 
+        <!-- Textarea Component Preview -->
         <div v-else-if="component.type === 'textarea'" class="component-preview">
-          <textarea placeholder="Text Area"></textarea>
+          <textarea 
+            :placeholder="component.placeholder"
+            :style="{
+              width: component.width + 'px', 
+              height: component.height + 'px',
+              fontSize: component.fontSize + 'px',
+              fontFamily: component.fontFamily || 'Arial, sans-serif',
+              borderRadius: component.borderRadius + 'px'
+            }">
+          </textarea>
         </div>
 
+        <!-- Checkbox Component Preview -->
         <div v-else-if="component.type === 'checkbox'" class="component-preview">
-          <input type="checkbox" /> Checkbox
+          <input type="checkbox" :checked="component.checked" /> {{ component.labelText }}
         </div>
 
         <span class="delete-icon" @click="deleteComponent(index)">X</span>
-
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import { ref, defineProps, defineEmits } from 'vue'; 
-  import { useComponentStore } from '../stores/useComponentStore'; 
+import { ref, defineEmits } from 'vue';
+import { useComponentStore } from '../stores/useComponentStore';
 
 export default {
   name: 'Whiteboard',
@@ -53,13 +77,41 @@ export default {
 
       const newComponent = {
         ...componentData,
+        id: Date.now(),
         x: event.clientX - boundingRect.left,
         y: event.clientY - boundingRect.top,
-        backgroundColor: '#e0f7fa',
+        backgroundColor: '#f0f0f0',
+        width: componentData.width || 150, 
+        height: componentData.height || 50, 
+        fontSize: componentData.fontSize || 14,
+        fontFamily: componentData.fontFamily || 'Arial, sans-serif',
+        borderRadius: componentData.borderRadius || 4,
+        textColor: componentData.textColor || '#000000',
+        buttonColor: componentData.buttonColor || '#007bff',
+        text: componentData.text || 'Button',
+        placeholder: componentData.placeholder || 'Enter text',
+        labelText: componentData.labelText || 'Check',
+        checked: componentData.checked || false,
       };
+
+      if (newComponent.type === 'button') {
+        newComponent.width = 60;
+        newComponent.height = 25;
+        newComponent.text = componentData.text || 'Click';
+      } else if (newComponent.type === 'textarea') {
+        newComponent.width = 100;
+        newComponent.height = 30;
+        newComponent.placeholder = componentData.placeholder || 'Enter your message...';
+      } else if (newComponent.type === 'checkbox') {
+        newComponent.width = 75;
+        newComponent.height = 25;
+        newComponent.checked = componentData.checked || false;
+        newComponent.labelText = componentData.labelText || 'Check';
+      }
 
       componentStore.addComponentToWhiteboard(newComponent);
     };
+
 
     const deleteComponent = (index) => {
       componentStore.removeComponentFromWhiteboard(index);
@@ -67,7 +119,7 @@ export default {
 
     // Emit the selected component to App.vue when a component is clicked
     const selectComponentForEditing = (component) => {
-      emit('selectComponent', component); 
+      emit('selectComponent', component);
     };
 
     const deselectComponent = () => {
@@ -88,11 +140,7 @@ export default {
 
 <style>
 .whiteboard {
-  width: 100%;
-  height: 500px;
-  border: 1px dashed #ccc;
   position: relative;
-  background-color: #f0f0f0;
 }
 
 .whiteboard h2 {
@@ -120,7 +168,6 @@ export default {
   background-color: #e0f7fa;
   border: 1px solid #004d40;
   border-radius: 4px;
-  min-width: 80px;
 }
 
 .delete-icon {

@@ -13,15 +13,18 @@ export const useComponentStore = defineStore('componentStore', {
 
   actions: {
     addComponentToWhiteboard(component) {
-      this.droppedComponents.push(component);  
+      this.droppedComponents.push(component);
     },
 
     removeComponentFromWhiteboard(index) {
-      this.droppedComponents.splice(index, 1); 
+      this.droppedComponents.splice(index, 1);
     },
 
-    setGeneratedCode(code) {
-      this.generatedCode = code;
-    },
+    updateComponent(id, updatedComponent) {
+      const component = this.droppedComponents.find(comp => comp.id === id);  // Find component by id
+      if (component) {
+        Object.assign(component, updatedComponent); // Update the component properties
+      }
+    }    
   },
 });
