@@ -5,8 +5,10 @@
     </header>
 
     <div class="layout">
-      <Whiteboard />
-      <ComponentMenu />
+      <Whiteboard @selectComponent="selectComponent" />
+  
+      <ComponentSettings v-if="selectedComponent" :component="selectedComponent" />
+      <ComponentMenu v-else />
     </div>
   </div>
 </template>
@@ -14,7 +16,7 @@
 <script>
 import Whiteboard from './components/Whiteboard.vue';
 import ComponentMenu from './components/ComponentMenu.vue';
-//import HelloWorld from './components/draft.vue';
+import ComponentSettings from './components/ComponentSettings.vue';
 
 export default {
   name: 'App',
@@ -22,19 +24,22 @@ export default {
   components: {
     Whiteboard,
     ComponentMenu,
+    ComponentSettings,
   },
 
   data() {
     return {
-      components: [],
-      generatedCode: '',
+      selectedComponent: null,
     };
+  },
+
+  methods: {
+    selectComponent(component) {
+      this.selectedComponent = component;
+    },
   },
 };
 </script>
 
 <style src="./style.css">
-#app {
-  font-family: Arial, sans-serif;
-}
 </style>
