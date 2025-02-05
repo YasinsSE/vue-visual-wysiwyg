@@ -5,7 +5,8 @@
 
 # Drag-and-Drop Whiteboard
 
-A **drag-and-drop UI editor** built with Vue.js, allowing users to visually arrange components like buttons, text areas, and checkboxes on a whiteboard. This project demonstrates the use of Vue's reactivity, HTML5 Drag-and-Drop API, modern component-based architecture, and state management with **Pinia**.
+A drag-and-drop UI editor built with Vue.js, allowing users to visually arrange components like buttons, text areas, and checkboxes on a whiteboard. This project demonstrates the use of Vue's reactivity, HTML5 Drag-and-Drop API, modern component-based architecture, and state management with Pinia.
+
 ---
 
 ## Features
