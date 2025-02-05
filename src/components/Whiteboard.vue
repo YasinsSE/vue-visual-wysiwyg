@@ -51,14 +51,14 @@
           <input type="checkbox" :checked="component.checked" /> {{ component.labelText }}
         </div>
 
-        <span class="delete-icon" @click="deleteComponent(index)">X</span>
+        <span class="delete-icon" @click="deleteComponent(component.id)">X</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref, defineEmits } from 'vue';
+import { defineEmits } from 'vue';
 import { useComponentStore } from '../stores/useComponentStore';
 
 export default {
@@ -77,47 +77,17 @@ export default {
 
       const newComponent = {
         ...componentData,
-        id: Date.now(),
         x: event.clientX - boundingRect.left,
         y: event.clientY - boundingRect.top,
-        backgroundColor: '#f0f0f0',
-        width: componentData.width || 150, 
-        height: componentData.height || 50, 
-        fontSize: componentData.fontSize || 14,
-        fontFamily: componentData.fontFamily || 'Arial, sans-serif',
-        borderRadius: componentData.borderRadius || 4,
-        textColor: componentData.textColor || '#000000',
-        buttonColor: componentData.buttonColor || '#007bff',
-        text: componentData.text || 'Button',
-        placeholder: componentData.placeholder || 'Enter text',
-        labelText: componentData.labelText || 'Check',
-        checked: componentData.checked || false,
       };
-
-      if (newComponent.type === 'button') {
-        newComponent.width = 60;
-        newComponent.height = 25;
-        newComponent.text = componentData.text || 'Click';
-      } else if (newComponent.type === 'textarea') {
-        newComponent.width = 100;
-        newComponent.height = 30;
-        newComponent.placeholder = componentData.placeholder || 'Enter your message...';
-      } else if (newComponent.type === 'checkbox') {
-        newComponent.width = 75;
-        newComponent.height = 25;
-        newComponent.checked = componentData.checked || false;
-        newComponent.labelText = componentData.labelText || 'Check';
-      }
 
       componentStore.addComponentToWhiteboard(newComponent);
     };
 
-
-    const deleteComponent = (index) => {
-      componentStore.removeComponentFromWhiteboard(index);
+    const deleteComponent = (id) => {
+      componentStore.removeComponentFromWhiteboard(id);
     };
 
-    // Emit the selected component to App.vue when a component is clicked
     const selectComponentForEditing = (component) => {
       emit('selectComponent', component);
     };
