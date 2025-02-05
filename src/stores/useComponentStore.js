@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+  import { defineStore } from 'pinia';
 
 export const useComponentStore = defineStore('componentStore', {
   state: () => ({
@@ -15,47 +15,45 @@ export const useComponentStore = defineStore('componentStore', {
     addComponentToWhiteboard(component) {
       const defaultValues = {
         button: {
-          backgroundColor: '#f0f0f0',
+          backgroundColor: '#fff',
           width: 80,
           height: 50,
           fontSize: 14,
           fontFamily: 'Arial, sans-serif',
           borderRadius: 4,
           textColor: '#000000',
-          buttonColor: '#007bff',
           text: 'Button',
           placeholder: '',
           labelText: '',
-          checked: false,
+          padding: 10,
+          onclickAction: '',
         },
+        
         textarea: {
-          backgroundColor: '#fff',
           width: 150,
           height: 70,
+          placeholderText: 'Enter text here...',
+          defaultValue: '',
           fontSize: 14,
           fontFamily: 'Arial, sans-serif',
-          borderRadius: 4,
           textColor: '#000000',
-          buttonColor: '',
-          text: '',
-          placeholder: 'Enter text...',
-          labelText: '',
-          checked: false,
+          backgroundColor: '#ffffff',
+          borderRadius: 4,
+          padding: 10,
+          maxLength: 100,
         },
+        
         checkbox: {
-          backgroundColor: '#fff',
-          width: 20,
-          height: 20,
-          fontSize: 14,
-          fontFamily: 'Arial, sans-serif',
-          borderRadius: 4,
-          textColor: '#000000',
-          buttonColor: '',
-          text: '',
-          placeholder: '',
-          labelText: 'Check',
-          checked: false,
-        },
+          width: 80,
+          height: 30,
+          checked: true,
+          value: '',
+          label: 'Label',
+          labelPosition: 'left',
+          color: '#008cba',
+          size: 'medium',
+          required: false,
+        }      
       };
     
       const componentDefaults = defaultValues[component.type] || {}; // fallback to empty object if no matching type
@@ -78,13 +76,6 @@ export const useComponentStore = defineStore('componentStore', {
       const component = this.droppedComponents.find(comp => comp.id === id);
       if (component) {
         Object.assign(component, updatedProperties);
-      }
-    },
-
-    updateComponentSettings(id, updatedSettings) {
-      const component = this.droppedComponents.find(comp => comp.id === id);
-      if (component) {
-        Object.assign(component, updatedSettings);
       }
     },
   },

@@ -8,7 +8,7 @@
       :style="{
         left: component.x + 'px',
         top: component.y + 'px',
-        backgroundColor: component.backgroundColor || '#e0f7fa',
+        backgroundColor: component.backgroundColor ,
         width: component.width + 'px',
         height: component.height + 'px',
       }"
@@ -26,7 +26,8 @@
               color: component.textColor || '#ffffff',
               fontSize: component.fontSize + 'px',
               fontFamily: component.fontFamily || 'Arial, sans-serif',
-              borderRadius: component.borderRadius + 'px'
+              borderRadius: component.borderRadius + 'px',
+              padding: component.padding + 'px'
             }">
             {{ component.text }}
           </button>
@@ -34,21 +35,48 @@
 
         <!-- Textarea Component Preview -->
         <div v-else-if="component.type === 'textarea'" class="component-preview">
-          <textarea 
-            :placeholder="component.placeholder"
+          <textarea
             :style="{
-              width: component.width + 'px', 
+              width: component.width + 'px',
               height: component.height + 'px',
               fontSize: component.fontSize + 'px',
               fontFamily: component.fontFamily || 'Arial, sans-serif',
-              borderRadius: component.borderRadius + 'px'
-            }">
+              borderRadius: component.borderRadius + 'px',
+              color: component.textColor || '#000000',
+              backgroundColor: component.backgroundColor || '#ffffff'
+            }"
+            :placeholder="component.placeholderText"
+            :value="component.defaultValue"
+            :maxlength="component.maxLength > 0 ? component.maxLength : undefined">
           </textarea>
         </div>
 
         <!-- Checkbox Component Preview -->
         <div v-else-if="component.type === 'checkbox'" class="component-preview">
-          <input type="checkbox" :checked="component.checked" /> {{ component.labelText }}
+          <div 
+            :style="{
+              width: component.width + 'px', 
+              height: component.height + 'px',
+              fontSize: component.size === 'small' ? '12px' : component.size === 'large' ? '18px' : '14px',
+              color: component.color || '#000000',
+              padding: '5px',
+              boxSizing: 'border-box'
+            }">
+            <label :style="{
+                  display: component.labelPosition === 'top' || component.labelPosition === 'bottom' ? 'block' : 'inline',
+                  marginBottom: component.labelPosition === 'top' ? '20px' : '',
+                  marginBottom: component.labelPosition === 'bottom' ? '-40px' : '',
+                  marginRight: component.labelPosition === 'left' ? '20px' : '',
+                  marginRight: component.labelPosition === 'right' ? '-60px' : ''
+            }">
+              {{ component.label }}
+            </label>
+            <input 
+              type="checkbox" 
+              :checked="component.checked" 
+              :required="component.required"
+            />
+          </div>
         </div>
 
         <span class="delete-icon" @click="deleteComponent(component.id)">X</span>
@@ -134,10 +162,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  background-color: #e0f7fa;
-  border: 1px solid #004d40;
-  border-radius: 4px;
+  background-color: bisque;
 }
 
 .delete-icon {
